@@ -13,9 +13,9 @@ clients = []
 for _ in range(3):
     clients.append(Client())
 target = player.money * 2
-moves = 0
+player.garage.append(market.car_shelter[1])
 
-chosen_client = 1
+chosen_client = 3
 
 if chosen_client < 0 or chosen_client > 14:
     raise ValueError('Invalid number')
@@ -24,17 +24,17 @@ player.menu()
 match chosen_client:
     case 1:
         player.buy(market.car_shelter, 0)
-        moves += 1
-        player.token = False
+        player.move()
     case 2:
-        moves += 1
-        player.token = False
+        car_index = int(input('Enter the index of the car you want to sell: '))
+        if len(player.garage) < car_index:
+            raise IndexError("You don't have a car at given position")
+        client_index = int(input('Enter the index of the customer you want to sell the car to: '))
+        player.sell(player.garage[car_index], clients[client_index])
     case 3:
-        moves += 1
-        player.token = False
+        player.move()
     case 4:
-        moves += 1
-        player.token = False
+        player.move()
     case 5:
         for car in market.car_shelter:
             print(car)

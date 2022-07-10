@@ -3,6 +3,8 @@ class Player:
         self._money = money
         self.garage = []
         self.token = True
+        self.moves = 0
+        self.wash_the_car = 0
 
     @property
     def money(self):
@@ -12,7 +14,7 @@ class Player:
     def money(self, cash):
         self._money = cash
 
-    def menu(self):
+    def menu (self):
         if self.token:
             print('==============MENU==============')
             print('Choose 1 to buy a car.')
@@ -45,7 +47,29 @@ class Player:
     def buy(self, market, index):
         if self.money < market[index].price:
             raise ValueError('Not enough money for the car 💰')
-        self.money -= market[index].price
+        self.money -= market[index].price + market[index].price * 0.02
         self.garage.append(market[index])
         market.remove(market[index])
+        self.wash_the_car += 1
         print('You bought the car 🚗')
+
+    def move(self):
+        self.moves += 1
+        self.token = False
+
+    def sell(self, car, client):
+        if car.price > client.money:
+            raise ValueError('The customer cannot afford this car')
+        print([car.brakes, car.suspension, car.engine, car.engine, car.gearbox].count(False), client.destroyed)
+        if [car.brakes, car.suspension, car.engine, car.engine, car.gearbox].count(False) != 0:
+            if not client.suspension:
+                raise ValueError("The customer don't accept car with broken suspension")
+            if not client.destroyed:
+                raise ValueError("The customer don't accept destroyed cars")
+        self.garage.remove(car)
+        client.garage.append(car)
+        client.money -= car.price + car.price * 0.02
+        self.money += car.price - car.price * 0.02
+        self.move()
+        self.wash_the_car += 1
+        print('The car was successfully sold')
