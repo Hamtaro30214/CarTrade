@@ -1,12 +1,13 @@
 import random
 
 from Player import Player
+import Constants
 
 
 class Client(Player):
     def __init__(self, money=round(random.uniform(500, 1000), 2)):
         super().__init__(money)
-        self.producers = random.sample(Player.PRODUCERS, 2)
+        self.producers = random.sample(Constants.PRODUCERS, 2)
         self.type_of_vehicle = random.choice(['Van', 'Car'])
         self.suspension = random.random() > 0.7
         self.destroyed = random.random() > 0.9
