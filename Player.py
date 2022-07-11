@@ -1,5 +1,5 @@
 class Player:
-    def __init__(self, money=2000.0):
+    def __init__ (self, money=2000.0):
         self._money = money
         self.garage = []
         self.token = True
@@ -7,11 +7,11 @@ class Player:
         self.wash_the_car = 0
 
     @property
-    def money(self):
+    def money (self):
         return self._money
 
     @money.setter
-    def money(self, cash):
+    def money (self, cash):
         self._money = cash
 
     def menu (self):
@@ -40,11 +40,11 @@ class Player:
             print('Choose 12 to end turn')
             print('Choose 13 to exit')
 
-    def start_game(self, market):
+    def start_game (self, market):
         if not any([car.price < self.money for car in market]):
             raise ValueError("Player can't afford any car")
 
-    def buy(self, market, index):
+    def buy (self, market, index):
         if self.money < market[index].price:
             raise ValueError('Not enough money for the car 💰')
         self.money -= market[index].price + market[index].price * 0.02
@@ -53,13 +53,15 @@ class Player:
         self.wash_the_car += 1
         print('You bought the car 🚗')
 
-    def move(self):
+    def move (self):
         self.moves += 1
         self.token = False
 
-    def sell(self, car, client):
+    def sell (self, car, client):
         if car.price > client.money:
             raise ValueError('The customer cannot afford this car')
+        if car.producer not in client.type_of_vehicle:
+            raise ValueError('The customer does not accept the car of this producer')
         print([car.brakes, car.suspension, car.engine, car.engine, car.gearbox].count(False), client.destroyed)
         if [car.brakes, car.suspension, car.engine, car.engine, car.gearbox].count(False) != 0:
             if not client.suspension:
@@ -73,3 +75,9 @@ class Player:
         self.move()
         self.wash_the_car += 1
         print('The car was successfully sold')
+
+    def show_parts(self, pos):
+        print(f'Brakes:{self.garage[pos].brakes}, Suspension:{self.garage[pos].suspension}, '
+              f'Engine:{self.garage[pos].engine}, Body:{self.garage[pos].body}, Gearbox:{self.garage[pos].gearbox}')
+
+

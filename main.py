@@ -1,7 +1,10 @@
+import math
 import random
 from Client import Client
 from Market import Market
+from Mechanic import Mechanic
 from Player import Player
+import Constants
 
 
 player = Player()
@@ -14,24 +17,33 @@ for _ in range(3):
     clients.append(Client())
 target = player.money * 2
 player.garage.append(market.car_shelter[1])
+print(market.car_shelter[1])
 
 chosen_client = 3
 
 if chosen_client < 0 or chosen_client > 14:
     raise ValueError('Invalid number')
 player.menu()
+mechanics = [Mechanic('Janus', 1), Mechanic('Marian', 0.9), Mechanic('Andrew', 0.8)]
 # TODO: case 5 and 8 one function to print all objects from list
 match chosen_client:
     case 1:
         player.buy(market.car_shelter, 0)
         player.move()
     case 2:
-        car_index = int(input('Enter the index of the car you want to sell: '))
-        if len(player.garage) < car_index:
-            raise IndexError("You don't have a car at given position")
-        client_index = int(input('Enter the index of the customer you want to sell the car to: '))
+        # car_index = int(input('Enter the index of the car you want to sell: '))
+        # if len(player.garage) < car_index:
+        #     raise IndexError("You don't have a car at given position")
+        # client_index = int(input('Enter the index of the customer you want to sell the car to: '))
+        car_index = client_index = 0
         player.sell(player.garage[car_index], clients[client_index])
     case 3:
+        # car_index = int(input('Enter the index of the car you want to repair: '))
+        # if len(player.garage) < car_index:
+        #     raise IndexError("You don't have a car at given position")
+        car_index = 0
+        player.show_parts(car_index)
+        # part_index = int(input('Enter the index of the part you want to repair: ')
         player.move()
     case 4:
         player.move()
