@@ -1,16 +1,12 @@
 class Car:
-    def __init__(self, producer, price, color, mileage, classification, brakes, suspension, engine, body, gearbox,
+    def __init__(self, producer, price, color, mileage, classification, parts,
                  loading_space):
         self.producer = producer
         self.price = price
         self.color = color
         self.mileage = mileage
         self.classification = classification
-        self.brakes = brakes
-        self.suspension = suspension
-        self.engine = engine
-        self.body = body
-        self.gearbox = gearbox
+        self.parts = parts
         self.loading_space = loading_space
 
     def __repr__(self):
@@ -19,4 +15,4 @@ class Car:
         else:
             type_of_vehicle = 'Car'
         return f'{type_of_vehicle}({self.producer}, {self.price}, {self.color}, {self.mileage}, {self.classification},'\
-               f' {self.brakes}, {self.suspension}, {self.engine}, {self.body}, {self.gearbox})'
+               f' {self.parts})'

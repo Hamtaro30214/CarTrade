@@ -11,10 +11,8 @@ class Market:
     def generate_car(self):
         self.car_shelter.append(Car(random.choice(Constants.PRODUCERS), round(random.uniform(500, 1000), 2),
                                     random.choice(Constants.COLORS), random.randint(20000, 300000),
-                                    random.choice(Constants.CLASSIFICATIONS), bool(random.getrandbits(1)),
-                                    bool(random.getrandbits(1)), bool(random.getrandbits(1)),
-                                    bool(random.getrandbits(1)),
-                                    bool(random.getrandbits(1)), random.randint(15, 100)))
+                                    random.choice(Constants.CLASSIFICATIONS),
+                                    [bool(random.getrandbits(1)) for _ in range(5)], random.randint(15, 100)))
 
     def show_basic_info(self):
         for car in self.car_shelter:

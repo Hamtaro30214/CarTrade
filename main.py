@@ -24,7 +24,7 @@ chosen_client = 3
 if chosen_client < 0 or chosen_client > 14:
     raise ValueError('Invalid number')
 player.menu()
-mechanics = [Mechanic('Janus', 1), Mechanic('Marian', 0.9), Mechanic('Andrew', 0.8)]
+mechanics = [Mechanic('Janus', 1, 1.5), Mechanic('Marian', 0.9, 1), Mechanic('Andrew', 0.8, 0.7)]
 # TODO: case 5 and 8 one function to print all objects from list
 match chosen_client:
     case 1:
@@ -38,12 +38,14 @@ match chosen_client:
         car_index = client_index = 0
         player.sell(player.garage[car_index], clients[client_index])
     case 3:
-        # car_index = int(input('Enter the index of the car you want to repair: '))
-        # if len(player.garage) < car_index:
-        #     raise IndexError("You don't have a car at given position")
-        car_index = 0
-        player.show_parts(car_index)
-        # part_index = int(input('Enter the index of the part you want to repair: ')
+        car_index = int(input('Enter the index of the car you want to repair: '))
+        if len(player.garage) < car_index:
+            raise IndexError("You don't have a car at given position")
+        part_index = int(input('Enter the index of the part you want to repair: '))
+        if player.garage[car_index].parts[car_index]:
+            raise IndexError('Part is already repaired')
+        mechanic_index = int(input('Choose one of mechanics with different chance to repair a part: '))
+        print(player.repair(car_index, part_index, mechanics[mechanic_index]))
         player.move()
     case 4:
         player.move()
