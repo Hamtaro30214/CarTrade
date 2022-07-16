@@ -4,7 +4,7 @@ import Constants
 
 
 class Player:
-    def __init__ (self, money=2000.0):
+    def __init__(self, money=2000.0):
         self._money = money
         self.garage = []
         self.token = True
@@ -12,7 +12,7 @@ class Player:
         self.wash_the_car = 0
 
     @property
-    def money (self):
+    def money(self):
         return self._money
 
     @money.setter
@@ -45,7 +45,7 @@ class Player:
             print('Choose 12 to end turn')
             print('Choose 13 to exit')
 
-    def start_game (self, market):
+    def start_game(self, market):
         if not any([car.price < self.money for car in market]):
             raise ValueError("Player can't afford any car")
 
@@ -58,11 +58,11 @@ class Player:
         self.wash_the_car += 1
         print('You bought the car 🚗')
 
-    def move (self):
+    def move(self):
         self.moves += 1
         self.token = False
 
-    def sell (self, car, client):
+    def sell(self, car, client):
         if car.price > client.money:
             raise ValueError('The customer cannot afford this car')
         if car.producer not in client.type_of_vehicle:
@@ -106,4 +106,28 @@ class Player:
         # success transaction
         self.money -= cost_of_part
         self.garage[car_index].parts[part] = True
+        self.garage[car_index].value += self.garage[car_index].value * Constants.PARTS_INCREASE_VALUE.get(part)
         print(f'You repaired one part and you have {self.garage[car_index].parts.count(False)} parts to repair')
+
+    @staticmethod
+    def show_ads():
+        print('Select 0 to buy marketing campaign for $400 and gain 2 clients\n'
+              'Select 1 to buy an ad in your local  newspaper for $400 and gain 1-3 clients\n'
+              'Select 2 to buy online ad for $200 and gain 1 client')
+
+    def buy_ad(self, ad):
+        if ad == 0:
+            if self.money < 400:
+                return ValueError("You can't afford the ad")
+            self.money -= 400
+            return 2
+        elif ad == 1:
+            if self.money < 300:
+                return ValueError("You can't afford the ad")
+            self.money -= 300
+            return random.randint(1, 3)
+        elif ad == 2:
+            if self.money < 200:
+                return ValueError("You can't afford the ad")
+            self.money -= 200
+            return 1

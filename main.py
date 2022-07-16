@@ -19,14 +19,14 @@ target = player.money * 2
 player.garage.append(market.car_shelter[1])
 print(market.car_shelter[1])
 
-chosen_client = 3
+menu_choose = 4
 
-if chosen_client < 0 or chosen_client > 14:
+if menu_choose < 0 or menu_choose > 14:
     raise ValueError('Invalid number')
 player.menu()
 mechanics = [Mechanic('Janus', 1, 1.5), Mechanic('Marian', 0.9, 1), Mechanic('Andrew', 0.8, 0.7)]
 # TODO: case 5 and 8 one function to print all objects from list
-match chosen_client:
+match menu_choose:
     case 1:
         player.buy(market.car_shelter, 0)
         player.move()
@@ -48,6 +48,12 @@ match chosen_client:
         print(player.repair(car_index, part_index, mechanics[mechanic_index]))
         player.move()
     case 4:
+        player.show_ads()
+        ad_index = int(input('Choose one of the forms of advertising: '))
+        new_clients = player.buy_ad(ad_index)
+        for _ in range(new_clients):
+            clients.append(Client())
+        print(f'You gain {new_clients} clients')
         player.move()
     case 5:
         for car in market.car_shelter:
