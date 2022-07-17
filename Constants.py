@@ -8,3 +8,4 @@ PARTS_BY_INDEX = {0: 1000, 1: 4000, 2: 600, 3: 1500, 4: 500}
 PARTS_INCREASE_VALUE = {0: 0.2, 1: 1, 2: 0.1, 3: 0.5, 4: 0.5}
 COST_CLASSIFICATIONS = {"Budget": 0.7, "Standard": 1, "Premium": 1.5}
 ADS = {'Marketing campaign': 400, 'Local newspaper': 300, 'Internet advertising': 200}
+AD_COST = {0: 400, 1: 300, 2: 200}
